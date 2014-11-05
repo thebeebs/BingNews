@@ -3,17 +3,41 @@
 <head>
     <meta charset="utf-8" />
     <title>BingNews</title>
-
-    <!-- BingNews references -->
-    <link href="css/index.css" rel="stylesheet" />
+    <link href="WinJS/css/ui-dark.css" rel="stylesheet" />
 </head>
 <body>
-    <p>Hello, your application is ready!</p>
+        <button data-win-control="WinJS.UI.BackButton"></button>
+        <h1 class="win-type-xx-large">Bing News</h1>        
 
-    <!-- Cordova reference, this is added to your app when it's built. -->
-    <script src="cordova.js"></script>
-    <script src="scripts/platformOverrides.js"></script>
+        <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+            <div class="smallListIconTextItem">
+                <div class="smallListIconTextItem-Detail">
+                    <h4 data-win-bind="textContent: Title"></h4>
+                    <h6 data-win-bind="textContent: Description"></h6>
+                </div>
+            </div>
+        </div>
 
-    <script src="scripts/index.js"></script>
+        <div id="listView"
+             class="win-selectionstylefilled"
+             data-win-control="WinJS.UI.ListView"
+             data-win-options="{
+            itemDataSource: Sample.ListView.data.dataSource,
+            itemTemplate: select('.smallListIconTextTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'none',
+            swipeBehavior: 'none',
+            layout: { type: WinJS.UI.ListLayout }
+    }">
+        </div>
+        <!-- Cordova reference, this is added to your app when it's built. -->
+        <script src="cordova.js"></script>
+        <script src="scripts/platformOverrides.js"></script>
+        <script src="WinJS/js/base.min.js"></script>
+        <script src="WinJS/js/ui.min.js"></script>
+        <script src="WinJS/js/WinJS.min.js"></script>
+        <script src="scripts/index.js"></script>
+    <script src="scripts/jquery-2.1.1.js"></script>
+      
 </body>
 </html>
