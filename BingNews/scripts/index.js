@@ -48,8 +48,8 @@
             WinJS.xhr(optionsImage).done(
            function (result) {
                heroImage.src = result.response.d.results[0].MediaUrl;
-               document.getElementsByTagName("h2")[0].innerText = result.response.d.results[0].Title;
-               document.getElementsByTagName("h3")[0].innerText = result.response.d.results[0].Description;
+               document.getElementsByTagName("h2")[0].innerText = search.Title;
+               document.getElementsByTagName("h3")[0].innerText = search.Description;
                document.getElementById("status").innerText = "Updated";
            },
            function (result) {
