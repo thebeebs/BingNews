@@ -1,2 +1,11 @@
 ﻿body {
 }
+
+#heroImage {
+    height: 100px;
+    overflow:hidden;
+}
+
+#heroDetails {
+    background:#0094ff;
+}
