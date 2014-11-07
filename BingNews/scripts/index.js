@@ -47,7 +47,7 @@
             };
             WinJS.xhr(optionsImage).done(
            function (result) {
-               heroImage.src = result.response.d.results[0].MediaUrl;
+               heroImage.style.backgroundImage = 'url(' + result.response.d.results[0].MediaUrl + ')';
                document.getElementsByTagName("h2")[0].innerText = search.Title;
                document.getElementsByTagName("h3")[0].innerText = search.Description;
                document.getElementById("status").innerText = "Updated";
@@ -58,10 +58,10 @@
        );
 
         }
-
+        
         WinJS.xhr(options).done(
             function (result) {
-                FetchHeroImage(result.response.d.results[0]);
+                FetchHeroImage({ Title: result.response.d.results[0].Title, Description: "Results from Microsoft" });
                 for (var i = 1; i < result.response.d.results.length; i++) {
                     Sample.ListView.data.push(result.response.d.results[i]);
 
