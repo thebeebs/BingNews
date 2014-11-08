@@ -11,4 +11,18 @@
 
 #heroDetails {
     background:#0094ff;
+    color: #fff;
+
+}
+
+#heroDetails h2, #heroDetails h3, #status {
+    padding: 5px 10px 5px 10px;
+
+
+}
+
+#refreshNews {
+        padding: 5px 10px 5px 10px ;
+        width:10px ;
+        border-radius:10px;
 }

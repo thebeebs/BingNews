@@ -26,18 +26,8 @@
 
         function FetchNewsClick() {
             document.getElementById("status").innerText = "Updating";
-        var options = {
-            url: "https://api.datamarket.azure.com/Bing/Search/v1/News?Query=%27microsoft%27&Market=%27en-GB%27&Adult=%27Strict%27",
-            responseType: "json",
-            type: "GET",
-            headers: {
-                "Authorization": "Basic " + cryp, "Content-type": "application/json; charset=utf-8", "Accept": "application/json"
-            },
-
-        };
-        function FetchHeroImage(search) {
-            var optionsImage = {
-                url: "https://api.datamarket.azure.com/Bing/Search/v1/Image?Query=%27" + search.Title + "%27",
+            var options = {
+                url: "https://api.datamarket.azure.com/Bing/Search/v1/News?Query=%27microsoft%27&Market=%27en-GB%27&Adult=%27Strict%27",
                 responseType: "json",
                 type: "GET",
                 headers: {
@@ -45,25 +35,48 @@
                 },
 
             };
-            WinJS.xhr(optionsImage).done(
-           function (result) {
-               heroImage.style.backgroundImage = 'url(' + result.response.d.results[0].MediaUrl + ')';
-               document.getElementsByTagName("h2")[0].innerText = search.Title;
-               document.getElementsByTagName("h3")[0].innerText = search.Description;
-               document.getElementById("status").innerText = "Updated";
-           },
-           function (result) {
-              document.getElementById("status").innerText = "Failed";
-           }
-       );
+            function FetchHeroImage(search) {
+                var optionsImage = {
+                    url: "https://api.datamarket.azure.com/Bing/Search/v1/Image?Query=%27" + search.Image + "%27",
+                    responseType: "json",
+                    type: "GET",
+                    headers: {
+                        "Authorization": "Basic " + cryp, "Content-type": "application/json; charset=utf-8", "Accept": "application/json"
+                    },
 
-        }
-        
+                };
+                WinJS.xhr(optionsImage).done(
+               function (result) {
+                   var json = result.response;
+                   try {
+                       json = JSON.parse(json);
+                   } catch (e) {
+
+                   }
+                   heroImage.style.backgroundImage = 'url(' + json.d.results[0].MediaUrl + ')';
+                   document.getElementsByTagName("h2")[0].innerText = search.Title;
+                   document.getElementsByTagName("h3")[0].innerText = search.Description;
+                   document.getElementById("status").innerText = "Updated";
+               },
+               function (result) {
+                   document.getElementById("status").innerText = "Failed";
+               }
+           );
+
+            }
+
+           
         WinJS.xhr(options).done(
             function (result) {
-                FetchHeroImage({ Title: result.response.d.results[0].Title, Description: "Results from Microsoft" });
-                for (var i = 1; i < result.response.d.results.length; i++) {
-                    Sample.ListView.data.push(result.response.d.results[i]);
+                var json = result.response;
+                try {
+                    json = JSON.parse(json);
+                } catch (e) {
+
+                }
+                FetchHeroImage({ Title: "Microsoft", Image: json.d.results[0].Title, Description: "Latest news about Microsoft" });
+                for (var i = 1; i < json.d.results.length; i++) {
+                    Sample.ListView.data.push(json.d.results[i]);
 
                 }
             },
@@ -74,6 +87,24 @@
     }
 
         WinJS.UI.processAll();
+
+        var shake = new Shake({
+            frequency: 300,                                                //milliseconds between polls for accelerometer data.
+            waitBetweenShakes: 1000,                                       //milliseconds to wait before watching for more shake events.
+            threshold: 1,                                                 //how hard the shake has to be to register.
+            success: function (magnitude, accelerationDelta, timestamp) {
+                navigator.notification.alert(
+           'SHAKE',  // message
+               function (){},         // callback
+       'BOOM BOOM',            // title
+       'THE ROOM'                  // buttonName
+   );
+
+            }, //callback when shake is detected. "this" will be the "shake" object.
+            failure: function () { },                                        //callback when watching/getting acceleration fails. "this" will be the "shake" object.
+        });
+        shake.startWatch();
+
 
     };
 
