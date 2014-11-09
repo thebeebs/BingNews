@@ -13,6 +13,9 @@
   <vs:features>
     <vs:feature>org.apache.cordova.device-motion@0.2.8</vs:feature>
     <vs:feature>org.apache.cordova.dialogs@0.2.8</vs:feature>
+    <vs:feature>com.msopentech.azure-mobile-services@0.1.2</vs:feature>
+    <vs:feature>org.apache.cordova.inappbrowser@0.5.0</vs:feature>
+    <vs:feature>org.apache.cordova.device@0.2.10</vs:feature>
   </vs:features>
   <vs:platformSpecificValues />
 </widget>
