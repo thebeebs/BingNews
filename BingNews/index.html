@@ -6,54 +6,78 @@
     <link href="WinJS/css/ui-light.css" rel="stylesheet" />
     
 </head>
-<body><div id="logged-in">
-    You are logged in as <span id="login-name"></span>.
-    <button id="log-out">Log out</button>
-</div>
-<div id="logged-out">
-    You are not logged in.
-    <button>Log in</button>
-</div>
-        <button data-win-control="WinJS.UI.BackButton"></button>
-       <div id="heroImage"></div>
-        <div id="heroDetails">
-            <h2></h2>
-            <h3></h3><div id="status">Updating</div>
-            <button id="refreshNews" class="win-navigation-backbutton win-disposable"></button>
-            
-        </div>
-        <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
-            <div class="smallListIconTextItem">
-                <div class="smallListIconTextItem-Detail">
-                    <h4 data-win-bind="textContent: Title"></h4>
-                    <h6 data-win-bind="textContent: Description"></h6>
+<body>
+    <div id="pivotScenario3" class="wide" data-win-control="WinJS.UI.Pivot" data-win-options="{ title: 'Bing News', selectedIndex: 0 }">
+        <div class="listviewpivotitem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'latest', managedLV: true }">
+            <div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+                <div class="smallListIconTextItem">
+                    <div class="smallListIconTextItem-Detail">
+                        <h4 data-win-bind="textContent: Title"></h4>
+                        <h6 data-win-bind="textContent: Description"></h6>
+                        <button>Favourite</button>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="smallFavListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+                <div class="smallListIconTextItem">
+                    <div class="smallListIconTextItem-Detail">
+                        <h4 data-win-bind="textContent: Title"></h4>
+                        <h6 data-win-bind="textContent: Description"></h6>
+                        <button>Remove</button>
+                    </div>
+                </div>
+            </div>
 
-        <div id="listView"
-             class="win-selectionstylefilled"
-             data-win-control="WinJS.UI.ListView"
-             data-win-options="{
-            itemDataSource: Sample.ListView.data.dataSource,
+            <div id="listView"
+                 class="win-selectionstylefilled"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{
+            itemDataSource: BingNews.ListView.data.dataSource,
             itemTemplate: select('.smallListIconTextTemplate'),
             selectionMode: 'none',
             tapBehavior: 'none',
             swipeBehavior: 'none',
             layout: { type: WinJS.UI.ListLayout }
     }">
-        </div><script src="scripts/jquery-2.1.1.js"></script>
-        <!-- Cordova reference, this is added to your app when it's built. -->
-        <script src="cordova.js"></script>
+            </div>
+        </div>
+        <div class="listviewpivotitem" data-win-control="WinJS.UI.PivotItem" data-win-options="{ 'header': 'favs', managedLV: true }">
+            <div id="logged-in">
+                You are logged in as <span id="login-name"></span>.
+                <button id="log-out">Log out</button>
+            </div>
+            <div id="logged-out">
+                You are not logged in.
+                <button>Log in</button>
+            </div>
+            <div id="listViewFav"
+                 class="win-selectionstylefilled"
+                 data-win-control="WinJS.UI.ListView"
+                 data-win-options="{
+            itemDataSource: BingNews.ListViewFav.data.dataSource,
+            itemTemplate: select('.smallFavListIconTextTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'none',
+            swipeBehavior: 'none',
+            layout: { type: WinJS.UI.ListLayout }
+    }">
+            </div>
+        </div>        
+    </div>
+   
+    
+    <script src="scripts/jquery-2.1.1.js"></script>
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
 
-        <!-- democordovabingnew references -->
-        <script src="services\mobileServices\settings\democordovabingnew.js"></script>
-        <script src="scripts/platformOverrides.js"></script>
-        <script src="WinJS/js/base.min.js"></script>
-        <script src="WinJS/js/ui.min.js"></script>
-        <script src="WinJS/js/WinJS.min.js"></script>
-        <script src="scripts/index.js"></script>
-  
+    <!-- democordovabingnew references -->
+    <script src="services\mobileServices\settings\democordovabingnew.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="WinJS/js/base.min.js"></script>
+    <script src="WinJS/js/ui.min.js"></script>
+    <script src="WinJS/js/WinJS.min.js"></script>
+    <script src="scripts/index.js"></script>
+
     <script src="scripts/shake.js"></script>
 </body>
 </html>

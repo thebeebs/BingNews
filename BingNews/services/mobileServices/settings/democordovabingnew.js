@@ -22,7 +22,17 @@ function refreshAuthDisplay() {
 
     if (isLoggedIn) {
         $("#login-name").text(client.currentUser.userId);
-       
+        var favs = client.getTable('favs');
+        var query = favs.where({ user: client.currentUser.userId });       
+
+        query.read().then(function (favItems) {
+            for (var i = 0; i < favItems.length; i++) {
+                BingNews.ListViewFav.data.push(favItems[i]);
+            }
+        });
+
+        //favs.insert({ Title: "Word Ranks High", Description: "According to recent reports Microsoft (NASDAQ MSFT) Word mobile app is climbing its way up to the peak Apple charts. ", complete: false, user: client.currentUser.userId });
+        //favs.insert({ Title: "Microsoft to replace Lync", Description: "Microsoft will replace Lync with Skype for Business as the company attempts to connect businesses with “hundreds of millions” of Skype users.", complete: false, user: client.currentUser.userId });
     }
 }
 
